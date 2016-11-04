@@ -1,0 +1,41 @@
+#! /bin/bash
+
+if [[ $# -eq 0 ]]
+then
+  echo "Please provide a command e.g. dce test"
+  exit 1;
+fi
+
+FILE=".dce"
+DIR=$PWD
+while [[ $DIR != '/' ]]; do
+    if [[ -e $DIR/$FILE ]]; then
+        DCE_FILE=$DIR/$FILE
+        break
+    fi
+    DIR=`dirname $DIR`
+done
+
+if [[ ! -f "$DCE_FILE" ]]
+then
+  echo "[ERROR]: Could not find $FILE file in current directory or any parent directories."
+  exit 22;
+else
+  echo "[INFO]: Using $DCE_FILE"
+fi
+
+while IFS="=" read -r key value; do
+  case "$key" in
+    "service_name") service_name="$value" ;;
+    "command_prefix") command_prefix="$value" ;;
+  esac
+done < "$DCE_FILE"
+
+if [[ -z $service_name || -z $command_prefix ]]
+then
+  echo "Unable to get service_name and command_prefix from the $FILE file"
+  exit 3
+fi
+
+docker-compose exec $service_name $command_prefix $@
+
