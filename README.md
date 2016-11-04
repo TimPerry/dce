@@ -16,3 +16,19 @@ e.g. `dce test`
 ## Install
 
 Clone this repo, alias dce=<checkout_dir>/dce
+
+## Setup
+
+Each project requires a .dce file in this format:
+
+```
+service_name=<your_service_name>
+command_prefix=<the_command_prefix>
+```
+
+e.g. (node example)
+
+```
+service_name=app
+command_prefix=npm run
+```
