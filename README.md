@@ -35,3 +35,7 @@ e.g. (node example)
 service_name=app
 command_prefix=npm run
 ```
+
+## ZSH + docker-compose plugin users
+
+Add this to your .zshrc file `unalias dce` otherwise the plugin will take precedence. 
