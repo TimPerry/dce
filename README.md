@@ -15,7 +15,10 @@ e.g. `dce test`
 
 ## Install
 
-Clone this repo, alias dce=<checkout_dir>/dce
+```
+brew tap TimPerry/repo
+brew install dce
+```
 
 ## Setup
 
